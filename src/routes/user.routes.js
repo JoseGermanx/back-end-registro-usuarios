@@ -4,14 +4,13 @@ const router = express.Router();
 
 const  listarUsuarios  = require("../controllers/user.getAllUser.js");
 const actualizarUsuario = require('../controllers/user.Update.js');
+const crearUsuario = require("../controllers/user.createUser.js")
 
 //listar usuarios
 router.get("/", listarUsuarios);
 
 //crear usuario
-router.post("/crear-usuario", (req, res) => {
-    res.send("Ruta POST gestionada");
-});
+router.post("/crear-usuario", crearUsuario);
 
 //login
 router.post("/login", (req, res) => {
