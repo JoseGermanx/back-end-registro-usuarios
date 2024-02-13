@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 
 const  listarUsuarios  = require("../controllers/user.getAllUser.js");
+const actualizarUsuario = require('../controllers/user.Update.js');
 
 //listar usuarios
 router.get("/", listarUsuarios);
@@ -18,9 +19,7 @@ router.post("/login", (req, res) => {
 });
 
 //actualizar usuario
-router.put("/actualizar-usuario", (req, res) => {
-    res.send("Ruta PUT gestionada");
-});
+router.put("/actualizar-usuario/:id", actualizarUsuario);
 
 //borrar usuario
 router.delete("/eliminar-usuario", (req, res) => {

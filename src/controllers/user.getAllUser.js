@@ -1,6 +1,6 @@
 
 const listarUsuarios = (req, res) => {
-    res.send("Ruta GET All Users gestionada");
+   res.status(200).send("Ruta GET gestionada");
 }
 
 module.exports = listarUsuarios;
