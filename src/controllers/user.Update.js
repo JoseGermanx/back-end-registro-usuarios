@@ -1,14 +1,36 @@
+const User = require('../models/user.model.js');
 
-const actualizarUsuario = (req, res) => {
+const actualizarUsuario = async (req, res) => {
     const { id } = req.params;
-
         // tomamos el id para buscar en la base de datos a ese usuario
 
-    res.status(200).json({
-        code: 200,
-        msg: `El id proporcionado es: ${id}`,
-        data: []
-    })
+        if(!id){
+            return res.status(400).json({
+                msg: "No se ha proporcionado un ID",
+                code: 400
+            })
+        }
+
+        if(id.length !== 24) {
+            return res.status(400).json({
+                msg: "El ID proporcionado no es válido",
+                code: 400
+            })
+        }
+
+        try {
+            await User.findByIdAndUpdate(id, { name: "Luis"})
+
+        res.status(200).json({
+            msg: "Usuario actualizado con éxito",
+            code: 200
+        })
+        } catch (error) {
+            console.log(error);
+
+        }
+        
+
 }
 
 module.exports = actualizarUsuario;
