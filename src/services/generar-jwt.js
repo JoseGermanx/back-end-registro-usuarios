@@ -7,7 +7,7 @@ const generarJWT = (idUser = "") => {
         const payload = {idUser};
         jwt.sign(
             payload,
-            "wiojwdfkjsdklfjslkdfjlskdajfsklndviwekndvsoklwei09fkjds",
+            process.env.SECRET_KEY_STRING,
             {
                 expiresIn: "4h"
             },

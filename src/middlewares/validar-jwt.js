@@ -11,7 +11,7 @@ const isAuth = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(access_token, "wiojwdfkjsdklfjslkdfjlskdajfsklndviwekndvsoklwei09fkjds");
+        const decoded = jwt.verify(access_token, process.env.SECRET_KEY_STRING);
         req.user = decoded;
     }
     catch (error) {
