@@ -1,5 +1,6 @@
 
 const User = require("../models/user.model.js");
+const bcrypt = require('bcrypt');
 
 
 const login = async (req, res) => {
@@ -24,7 +25,13 @@ const login = async (req, res) => {
    }
 
    //verificar que la contraseña sea correcta
-   if(user.password !== password) {
+
+   //agregar un paso para poder verificar la contraseña encriptada
+
+   const passwordVerified = bcrypt.compareSync(password, user.password)
+
+
+   if(!passwordVerified) {
     return res.status(400).json({
         code: 400,
         msg: "Contraseña incorrecta"
