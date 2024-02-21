@@ -1,6 +1,7 @@
 
 const User = require("../models/user.model.js");
 const bcrypt = require('bcrypt');
+const generarJWT = require('../services/generar-jwt.js');
 
 
 const login = async (req, res) => {
@@ -38,13 +39,16 @@ const login = async (req, res) => {
     })
    }
 
+   const token = await generarJWT(user._id);
+
    res.status(200).json({
        code: 200,
        msg: "Usuario logueado con éxito",
        data: {
         name: user.name,
         id: user._id
-       }
+       },
+       token: token
    })
 
     }
