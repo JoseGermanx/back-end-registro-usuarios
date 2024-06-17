@@ -50,10 +50,6 @@ const login = async (req, res) => {
    .json({
        code: 200,
        msg: "Usuario logueado con éxito",
-       data: {
-        name: user.name,
-        id: user._id
-       }
    })
 
     }

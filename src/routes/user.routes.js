@@ -8,6 +8,7 @@ const crearUsuario = require("../controllers/user.createUser.js");
 const login = require('../controllers/login.user.js');
 const isAuth = require('../middlewares/validar-jwt.js');
 const logOut = require('../controllers/user.logOut.js');
+const getUser = require('../controllers/user.getUser.js');
 
 //listar usuarios
 router.get("/", listarUsuarios);
@@ -18,6 +19,9 @@ router.post("/crear-usuario", crearUsuario);
 //login
 router.post("/login", login);
 
+//get usuario
+router.get("/get-usuario", isAuth, getUser);
+
 //actualizar usuario
 router.put("/actualizar-usuario/:id", actualizarUsuario);
 
@@ -27,11 +31,13 @@ router.delete("/eliminar-usuario", (req, res) => {
 });
 
 router.get("/ruta-protegida", isAuth, (req, res) => {
+
     try {
-         res.status(200).json({
+        res.status(200).json({
         code: 200,
         msg: "Ruta protegida"
     })
+
     } catch (error) {
         console.log(error);
         res.status(500).json({

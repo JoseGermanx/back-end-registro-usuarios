@@ -10,6 +10,8 @@ const isAuth = (req, res, next) => {
         })
     }
 
+    
+
     try {
         const decoded = jwt.verify(access_token, process.env.SECRET_KEY_STRING);
         req.user = decoded;
