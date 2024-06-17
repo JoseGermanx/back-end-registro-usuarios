@@ -41,14 +41,19 @@ const login = async (req, res) => {
 
    const token = await generarJWT(user._id);
 
-   res.status(200).json({
+   res.status(200)
+   .cookie('token', token, {
+    httpOnly: false,
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 7 dias
+   })
+   .json({
        code: 200,
        msg: "Usuario logueado con éxito",
        data: {
         name: user.name,
         id: user._id
-       },
-       token: token
+       }
    })
 
     }
