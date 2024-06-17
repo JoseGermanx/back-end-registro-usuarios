@@ -7,6 +7,7 @@ const actualizarUsuario = require('../controllers/user.Update.js');
 const crearUsuario = require("../controllers/user.createUser.js");
 const login = require('../controllers/login.user.js');
 const isAuth = require('../middlewares/validar-jwt.js');
+const logOut = require('../controllers/user.logOut.js');
 
 //listar usuarios
 router.get("/", listarUsuarios);
@@ -29,6 +30,8 @@ router.get("/ruta-protegida", isAuth, (req, res) => {
     res.send("Ruta protegida");
 }
 );
+
+router.post("/logout", logOut);
 
 
 module.exports = router;
