@@ -4,6 +4,7 @@ const generarJWT = require("../services/generar-jwt.js");
 const getUser = async (req, res) => { 
 
     const { user } = req;
+    req.session.user = req.user || {};
 
     try {
         const userDB = await User.findById(user.idUser);
