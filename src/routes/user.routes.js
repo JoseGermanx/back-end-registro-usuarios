@@ -27,7 +27,19 @@ router.delete("/eliminar-usuario", (req, res) => {
 });
 
 router.get("/ruta-protegida", isAuth, (req, res) => {
-    res.send("Ruta protegida");
+    try {
+         res.status(200).json({
+        code: 200,
+        msg: "Ruta protegida"
+    })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            code: 500,
+            msg: "Error en el servidor"
+        })
+    }
+   
 }
 );
 
