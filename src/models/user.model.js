@@ -12,8 +12,13 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-    password: String,
+    password: {
+        type: String,
+        required: true,
+        default: "123456789"
+    },
     rut: String,
+    google: Boolean
 })
 
 // modelo

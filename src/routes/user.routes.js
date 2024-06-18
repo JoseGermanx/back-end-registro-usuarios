@@ -5,7 +5,7 @@ const router = express.Router();
 const  listarUsuarios  = require("../controllers/user.getAllUser.js");
 const actualizarUsuario = require('../controllers/user.Update.js');
 const crearUsuario = require("../controllers/user.createUser.js");
-const login = require('../controllers/login.user.js');
+const {login, googleLogin}= require('../controllers/login.user.js');
 const isAuth = require('../middlewares/validar-jwt.js');
 const logOut = require('../controllers/user.logOut.js');
 const getUser = require('../controllers/user.getUser.js');
@@ -19,6 +19,10 @@ router.post("/crear-usuario", validarRegistro, crearUsuario);
 
 //login
 router.post("/login", validarLogin, login);
+
+//login google
+
+router.post("/google-in", googleLogin)
 
 //get usuario
 router.get("/get-usuario", isAuth, getUser);
