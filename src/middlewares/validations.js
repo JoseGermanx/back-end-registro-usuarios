@@ -27,9 +27,13 @@ const validarLogin = [
     check('password', 'La contraseña es obligatoria').not().isEmpty(),
     validarCampos
 ]
-
+const validarGoogle = [
+    check('token_gg', 'El id_token es obligatorio').not().isEmpty(),
+    validarCampos
+]
 module.exports = {
     validarRegistro,
     validarLogin,
+    validarGoogle,
     validarCampos
 }

@@ -3,7 +3,7 @@ const User = require("../models/user.model.js");
 const bcrypt = require('bcrypt');
 const generarJWT = require('../services/generar-jwt.js');
 const response = require("../res/response.js");
-const checkGoogleAuthToken = require("../services/getGoogleAuth,js");
+const checkGoogleAuthToken = require("../services/getGoogleAuth.js/index.js");
 
 
 const login = async (req, res) => {
@@ -57,7 +57,6 @@ const googleLogin = async (req, res) => {
     try {
 
     const googleUser = await checkGoogleAuthToken(token_gg);
-    console.log(googleUser);
 
     try {
         const user = await User.findOne({email: googleUser.email})

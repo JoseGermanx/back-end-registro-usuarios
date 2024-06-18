@@ -9,7 +9,7 @@ const {login, googleLogin}= require('../controllers/login.user.js');
 const isAuth = require('../middlewares/validar-jwt.js');
 const logOut = require('../controllers/user.logOut.js');
 const getUser = require('../controllers/user.getUser.js');
-const { validarRegistro, validarLogin } = require('../middlewares/validations.js');
+const { validarRegistro, validarLogin, validarGoogle } = require('../middlewares/validations.js');
 
 //listar usuarios
 router.get("/", listarUsuarios);
@@ -22,7 +22,7 @@ router.post("/login", validarLogin, login);
 
 //login google
 
-router.post("/google-in", googleLogin)
+router.post("/google-in", validarGoogle, googleLogin)
 
 //get usuario
 router.get("/get-usuario", isAuth, getUser);
