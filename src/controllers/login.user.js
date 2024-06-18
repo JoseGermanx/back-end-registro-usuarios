@@ -3,7 +3,7 @@ const User = require("../models/user.model.js");
 const bcrypt = require('bcrypt');
 const generarJWT = require('../services/generar-jwt.js');
 const response = require("../res/response.js");
-const checkGoogleAuthToken = require("../services/getGoogleAuth.js/index.js");
+const checkGoogleAuthToken = require("../services/getGoogleAuth.js");
 
 
 const login = async (req, res) => {
