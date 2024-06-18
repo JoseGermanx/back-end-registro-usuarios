@@ -9,15 +9,16 @@ const login = require('../controllers/login.user.js');
 const isAuth = require('../middlewares/validar-jwt.js');
 const logOut = require('../controllers/user.logOut.js');
 const getUser = require('../controllers/user.getUser.js');
+const { validarRegistro, validarLogin } = require('../middlewares/validations.js');
 
 //listar usuarios
 router.get("/", listarUsuarios);
 
 //crear usuario
-router.post("/crear-usuario", crearUsuario);
+router.post("/crear-usuario", validarRegistro, crearUsuario);
 
 //login
-router.post("/login", login);
+router.post("/login", validarLogin, login);
 
 //get usuario
 router.get("/get-usuario", isAuth, getUser);

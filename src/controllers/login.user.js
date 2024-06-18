@@ -8,11 +8,6 @@ const response = require("../res/response.js");
 const login = async (req, res) => {
 
     const { email, password } = req.body;
-
-    if(!email || !password) {
-        return response(res, 400, null, "Email y contraseña son requeridos")
-    }
-
     try {
    // verificar que el usuario exista en la base de datos
    const user = await User.findOne({email: email})
