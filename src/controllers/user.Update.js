@@ -1,4 +1,5 @@
 const User = require("../models/user.model.js");
+const response = require("../res/response.js");
 
 const actualizarUsuario = async (req, res) => {
   const { id } = req.params;
@@ -6,24 +7,15 @@ const actualizarUsuario = async (req, res) => {
   // tomamos el id para buscar en la base de datos a ese usuario
 
   if (!id) {
-    return res.status(400).json({
-      msg: "No se ha proporcionado un ID",
-      code: 400,
-    });
+    return response(res, 400, null, "El ID es requerido");
   }
 
   if (id.length !== 24) {
-    return res.status(400).json({
-      msg: "El ID proporcionado no es válido",
-      code: 400,
-    });
+    return response(res, 400, null, "El ID no es válido");
   }
 
   if(!name || !lastName) {
-    return res.status(400).json({
-      msg: "Debes enviar datos para actualizar",
-      code: 400
-    })
+    return response(res, 400, null, "El nombre y apellido son requeridos");
   }
 
   const userChanges = {
@@ -34,11 +26,9 @@ const actualizarUsuario = async (req, res) => {
   try {
     await User.findByIdAndUpdate(id, userChanges);
 
-    res.status(200).json({
-      msg: "Usuario actualizado con éxito",
-      code: 200,
-    });
+    response(res, 200, null, "Usuario actualizado con éxito");  
   } catch (error) {
+    response(res, 500, null, "Error en el servidor");
     console.log(error);
   }
 };

@@ -2,6 +2,7 @@
 const User = require("../models/user.model.js");
 const bcrypt = require('bcrypt');
 const generarJWT = require('../services/generar-jwt.js');
+const response = require("../res/response.js");
 
 
 const login = async (req, res) => {
@@ -9,20 +10,15 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     if(!email || !password) {
-        return res.status(400).json({
-            code: 400,
-            msg: "Email y password son requeridos"
-        })
+        return response(res, 400, null, "Email y contraseña son requeridos")
     }
+
     try {
    // verificar que el usuario exista en la base de datos
    const user = await User.findOne({email: email})
 
    if(!user) {
-    return res.status(400).json({
-        code: 400,
-        msg: "Usuario no registrado en nuestro sistema"
-    })
+    return response(res, 400, null, "Usuario no encontrado")
    }
 
    //verificar que la contraseña sea correcta
@@ -33,10 +29,7 @@ const login = async (req, res) => {
 
 
    if(!passwordVerified) {
-    return res.status(400).json({
-        code: 400,
-        msg: "Contraseña incorrecta"
-    })
+    return response(res, 400, null, "Contraseña incorrecta")
    }
 
    const token = await generarJWT(user._id);
@@ -55,12 +48,8 @@ const login = async (req, res) => {
     }
     catch (error) {
         console.log(error);
+        response(res, 500, null, "Error en el servidor")
     }
-
-  
-
-   
-
 }
 
 

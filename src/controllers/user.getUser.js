@@ -1,4 +1,5 @@
 const User = require("../models/user.model.js");
+const response = require("../res/response.js");
 const generarJWT = require("../services/generar-jwt.js");
 
 const getUser = async (req, res) => { 
@@ -28,10 +29,7 @@ const getUser = async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({
-            code: 500,
-            msg: "Error en el servidor"
-        })
+        response(res, 500, null, "Error en el servidor")
     }
 
 }

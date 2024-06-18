@@ -1,5 +1,6 @@
 const User = require("../models/user.model.js");
 const bcrypt = require('bcrypt');
+const response = require("../res/response.js");
 
 const crearUsuario = async (req, res) => {
 
@@ -9,17 +10,15 @@ const crearUsuario = async (req, res) => {
     const salt = bcrypt.genSaltSync();
     const passwordEncripted = bcrypt.hashSync(password, salt)
 
-    await User.create({
+    const user = await User.create({
     name: name,
     lastName: lastName,
     email: email,
     password: passwordEncripted
   });
 
-  res.status(201).json({
-    msg: "Usuario creado con éxito",
-    code: 201
-  })
+  response(res, 201, user._id, "Usuario creado con éxito")
+
 };
 
 module.exports = crearUsuario;
